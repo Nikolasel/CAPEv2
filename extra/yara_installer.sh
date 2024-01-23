@@ -13,5 +13,5 @@ cd ..
 # for root
 pip install ./yara-python
 if [ -d yara-python ]; then
-    rm -r yara-python
+    rm -rf yara-python
 fi

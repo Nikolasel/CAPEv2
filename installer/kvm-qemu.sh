@@ -433,7 +433,7 @@ function install_pyvmidbg() {
 
 function install_libvirt() {
     # http://ask.xmodulo.com/compile-virt-manager-debian-ubuntu.html
-    #rm -r /usr/local/lib/python2.7/dist-packages/libvirt*
+    #rm -rf /usr/local/lib/python2.7/dist-packages/libvirt*
 
     # remove old
     apt purge libvirt0 libvirt-bin -y
@@ -496,7 +496,7 @@ EOH
 
     cd /tmp || return
     if [ -f  libvirt-$libvirt_version.tar.xz ]; then
-        rm -r libvirt-$libvirt_version
+        rm -rf libvirt-$libvirt_version
     else
         wget -q https://libvirt.org/sources/libvirt-$libvirt_version.tar.xz
         wget -q https://libvirt.org/sources/libvirt-$libvirt_version.tar.xz.asc
@@ -584,7 +584,7 @@ EOH
         wget -q https://github.com/libvirt/libvirt-python/archive/v$libvirt_version.zip
     fi
     if [ -d "libvirt-python-$libvirt_version" ]; then
-        rm -r "libvirt-python-$libvirt_version"
+        rm -rf "libvirt-python-$libvirt_version"
     fi
     unzip v$libvirt_version.zip
     cd "libvirt-python-$libvirt_version" || return
@@ -593,7 +593,7 @@ EOH
     cd ..
     # Remove the $libvirt_version directory to permission errors when runing
     # cd /opt/CAPEv2/ ; sudo -u cape poetry run extra/libvirt_installer.sh later
-    rm -r libvirt-python-$libvirt_version
+    rm -rf libvirt-python-$libvirt_version
     if [ "$OS" = "Linux" ]; then
         # https://github.com/libvirt/libvirt/commit/e94979e901517af9fdde358d7b7c92cc055dd50c
         groupname=""
@@ -862,7 +862,7 @@ function install_qemu() {
     cd /tmp || return
 
     echo '[+] Cleaning QEMU old install if exists'
-    rm -r /usr/share/qemu >/dev/null 2>&1
+    rm -rf /usr/share/qemu >/dev/null 2>&1
     dpkg -r ubuntu-vm-builder python-vm-builder >/dev/null 2>&1
     dpkg -l |grep qemu |cut -d " " -f 3|xargs dpkg --purge --force-all >/dev/null 2>&1
 
@@ -960,7 +960,7 @@ function install_seabios() {
     echo '[+] Installing SeaBios dependencies'
     aptitude install -f git acpica-tools -y
     if [ -d seabios ]; then
-        rm -r seabios
+        rm -rf seabios
     fi
     if git clone https://github.com/coreboot/seabios.git; then
         cd seabios || return
@@ -1156,7 +1156,7 @@ cat << EndOfHelp
     8 ValueError: Namespace GtkSource not available
     $ aptitude install -f gir1.2-gtksource-4 libgtksourceview-4-0 libgtksourceview-4-common
     * Error will specify version, example gi.require_version("GtkSource", "4"), if that version is not available for your distro
-    * you will need downgrade your virt-manager with $ sudo rm -r /usr/share/virt-manager and install older version
+    * you will need downgrade your virt-manager with $ sudo rm -rf /usr/share/virt-manager and install older version
 
     9. ImportError: cannot import name Vte
     $ aptitude install -f gir1.2-vte-2.90

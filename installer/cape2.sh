@@ -755,7 +755,7 @@ function install_yara() {
     # for root
     pip3 install ./yara-python
     if [ -d yara-python ]; then
-        rm -r yara-python
+        rm -rf yara-python
     fi
 
     if id "cape" >/dev/null 2>&1; then
@@ -764,7 +764,7 @@ function install_yara() {
         cd -
     fi
     if [ -d yara-python ]; then
-        rm -r yara-python
+        rm -rf yara-python
     fi
 
 }
@@ -1185,7 +1185,7 @@ function install_CAPE() {
     #packages are needed for build options in extra/yara_installer.sh
     apt install libjansson-dev libmagic1 libmagic-dev -y
     sudo -u ${USER} bash -c 'poetry run extra/yara_installer.sh'
-    sudo rm -r yara-python
+    sudo rm -rf yara-python
 
     sudo usermod -aG kvm ${USER}
     sudo usermod -aG libvirt ${USER}
